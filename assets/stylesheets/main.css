@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
 
 body {
-  background-color: purple;
+  background-color: #330066;
   font-family: 'Playfair Display', Times, serif;
   display: flex;
   align-items: center;
@@ -9,8 +9,9 @@ body {
 }
 
 .title {
-  font-size: 48px;
-  background: -webkit-linear-gradient(left, orange, aqua);
+  margin-top: 100px;
+  font-size: 100px;
+  background: -webkit-linear-gradient(left, #ff3300, #1751a8);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
