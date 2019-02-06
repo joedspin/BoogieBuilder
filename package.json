@@ -1,0 +1,19 @@
+{
+  "name": "boogiebuilder",
+  "version": "1.0.0",
+  "description": "a fun game for interatively building disco beats",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joedspin/BoogieBuilder.git"
+  },
+  "author": "Joe DEspinosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joedspin/BoogieBuilder/issues"
+  },
+  "homepage": "https://github.com/joedspin/BoogieBuilder#readme"
+}
