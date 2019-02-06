@@ -2,7 +2,7 @@
   "name": "boogiebuilder",
   "version": "1.0.0",
   "description": "a fun game for interatively building disco beats",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
