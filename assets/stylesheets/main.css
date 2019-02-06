@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+
+body {
+  background-color: purple;
+  font-family: 'Playfair Display', Times, serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 48px;
+  background: -webkit-linear-gradient(left, orange, aqua);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
