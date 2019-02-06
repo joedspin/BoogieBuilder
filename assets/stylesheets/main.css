@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One');
 
 body {
   background-color: #330066;
-  font-family: 'Playfair Display', Times, serif;
+  font-family: 'Fugaz One', Times, serif;
   display: flex;
   align-items: center;
   justify-content: center;
