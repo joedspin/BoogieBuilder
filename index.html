@@ -7,12 +7,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheets/main.css" />
   <script src="assets/javascript/main.js"></script>
+  <script src="assets/javascript/three.js"></script>
+  
 </head>
 <body>
   <div class="stage">
-    <div class="title">Boogie Builder</div>
+    <div class="play-controls">
+      <button id="button1" data-playing="false" role="switch" aria-checked="false">
+        <span>Play/Pause</span>
+      </button>
+      <button id="button2" data-playing="false" role="switch" aria-checked="false">
+        <span>Play/Pause</span>
+      </button>
+    </div>
+    <div class="center-panel">
+      <div class="title">Boogie Builder</div>
+      <div class="stage">
+        <canvas>
+          <audio id="audio1" src="assets/audios/4709_The_Bronx.stem.mp3" type="audio/mpeg"></audio>
+          <audio id="audio2" src="assets/audios/audiotest.mp3" type="audio/mpeg"></audio>
+        </canvas>
+      </div>
+    </div>
     <div class="sideLinks">
-      <a href="https://www.linkedin.com/in/joe-d-espinosa-5617586/" target="_blank"><img src="assets/images/LinkedIn_Logo-White-34px-R.png" alt="Visit my LinkedIn page"></a>
+      <a href="https://www.linkedin.com/in/joe-d-espinosa-5617586/" target="_blank"><img src="assets/images/LinkedIn_Logo-White-66px-TM.png" alt="Visit my LinkedIn page"></a>
       <a href="https://github.com/joedspin/BoogieBuilder" target="_blank"><img src="assets/images/GitHub_Logo_White.png" alt="Visit the GitHub code repo for this app"></a>
     </div>
   </div>
