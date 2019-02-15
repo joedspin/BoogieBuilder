@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
+function startAudio() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const audioContext = new AudioContext();
+  const audioAnalyser = audioContext.createAnalyser();
 
   const audioElement1 = document.getElementById('audio1');
   const audioElement2 = document.getElementById('audio2');
@@ -10,13 +11,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   track1.connect(audioContext.destination);
   track2.connect(audioContext.destination);
+  track1.connect(analyser);
+  track2.connect(analyser);
+}
+
+let audioWaiting= true;
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  
 
   const playButton1 = document.getElementById('button1');
   const playButton2 = document.getElementById('button2');
 
-
   const handlePlayButton = (audioEl, buttonEl) => {
+    if (audioWaiting) startAudio();
     // check if context is in suspended state (autoplay policy)
+
     if (audioContext.state === 'suspended') {
       audioContext.resume();
     }
