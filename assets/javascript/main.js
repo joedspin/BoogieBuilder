@@ -5,13 +5,6 @@ let AudioContext = '';
 let audioContext = '';
 let interval = '';
 let info = '';
-let scene = '';
-let camera = '';
-let renderer = '';
-let cube = '';
-let line = '';
-let geometry = '';
-let material = '';
 let globalShift = '';
 let dataArray = '';
 let driftingCircles = [];
@@ -68,12 +61,12 @@ class driftingCircle {
 
   drift() {
     this.y -= 40;
-    // let xMove = Math.floor(Math.random()*3);
-    // if (Math.floor(Math.random()*2) === 1) {
-    //   this.x += xMove;
-    // } else {
-    //   this.x -= xMove;
-    // }
+    let xMove = Math.floor(Math.random()*3);
+    if (Math.floor(Math.random()*2) === 1) {
+      this.x += xMove;
+    } else {
+      this.x -= xMove;
+    }
     this.size = (this.size * 1.24);
   }
 
@@ -120,10 +113,6 @@ function drawBar(x, y, w) {
   ctx.fill();
 }
 
-  // for (let i = 1; i <= numOn; i++) {
-  //   drawCircle(20 + (i * 30), 370, 10, "limegreen");
-  // }
-
 function drawTimer() {
   let ct = slices[1].audio.currentTime;
   let du = slices[1].audio.duration;
@@ -149,7 +138,6 @@ function draw() {
         size = 50 * (a[j] / Math.max.apply(null, a));
         let randChoice = Math.floor(Math.random() * 12);
         if (randChoice === 6) { color = COLORS[Math.floor(Math.random()*8)]; }
-        console.log(randChoice);
         driftingCircles.push(new driftingCircle((i * 40) + 30, 390, size, color));
         driftingCircles.forEach((circle) => {
           circle.draw();
@@ -161,15 +149,6 @@ function draw() {
   }
   drawTimer();
 }
-
-// function animate() {
-//   requestAnimationFrame(animate);
-//   cube.rotation.x += 0.01;
-//   cube.rotation.y += 0.01;
-//   line.rotation.x += 0.01;
-//   line.rotation.y += 0.01;
-//   renderer.render(scene, camera);
-// }
 
 function handlePlayButton(buttonEl) {
   // if audio context state is suspended, resume it
@@ -205,28 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
-
-  // scene = new THREE.Scene();
-  // camera = new THREE.PerspectiveCamera(75, 500 / 400, 0.1, 1000);
-  // renderer = new THREE.WebGLRenderer();
-
-  // renderer.setSize(window.innerWidth, window.innerHeight);
-  // // document.body.appendChild(renderer.domElement);
-
-  // geometry = new THREE.BoxGeometry(1, 1, 2);
-  // material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  // cube = new THREE.Mesh(geometry, material);
-  // scene.add(cube);
-  // material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-  // geometry = new THREE.Geometry();
-  // geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
-  // geometry.vertices.push(new THREE.Vector3(0, 10, 0));
-  // geometry.vertices.push(new THREE.Vector3(10, 0, 0));
-  // line = new THREE.Line(geometry, material);
-  // scene.add(line);
-  // animate();
-
-  // camera.position.z = 5;
 
   title = document.getElementById('title');
   for (let i = 0; i < 12; i++) {
