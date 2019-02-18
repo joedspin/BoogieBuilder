@@ -131,10 +131,11 @@ function drawMessage() {
 }
 
 function drawTimer() {
+  // also includes logic to restart the loop
   let ct = slices[1].audio.currentTime;
   let du = slices[1].audio.duration;
   let size = ct / du * 600;
-  drawBar(300 - (size / 2), 390, size);
+  drawBar(300 - (size / 2), 380, size);
   if (ct === du) {
     // don't restart until all the audios have finished!
     let othersFinished = false;
