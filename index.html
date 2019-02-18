@@ -8,30 +8,77 @@
   <link rel="stylesheet" type="text/css" media="screen" href="./assets/stylesheets/main.css" />
   <script src="assets/javascript/main.js"></script>
   <script src="assets/javascript/three.js"></script>
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
   <div class="stage">
     <div class="play-controls">
-      <button id="button1" data-playing="false" role="switch" aria-checked="false">
-        <span>Play/Pause</span>
-      </button>
-      <button id="button2" data-playing="false" role="switch" aria-checked="false">
-        <span>Play/Pause</span>
+      <button id="button1" class="play-button" data-playing="false" role="switch" aria-checked="false">
+        Play
       </button>
     </div>
     <div class="center-panel">
-      <div class="title">Boogie Builder</div>
+      <div class="title" id="title">Boogie Builder</div>
+      <div><p id="info"></p></div>
       <div class="stage">
-        <canvas>
-          <audio id="audio1" src="assets/audios/4709_The_Bronx.stem.mp3" type="audio/mpeg"></audio>
-          <audio id="audio2" src="assets/audios/audiotest.mp3" type="audio/mpeg"></audio>
+        <canvas id="canvas" width="500" height="400">
+          <audio id="audio0" src="assets/audios/guitar1.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio1" src="assets/audios/guitar2.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio2" src="assets/audios/guitar3.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio3" src="assets/audios/drum1.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio4" src="assets/audios/drum2.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio5" src="assets/audios/drum3.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio6" src="assets/audios/string1.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio7" src="assets/audios/string2.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio8" src="assets/audios/string3.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio9" src="assets/audios/bass1.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio10" src="assets/audios/bass2.mp3" type="audio/mpeg" muted></audio>
+          <audio id="audio11" src="assets/audios/bass3.mp3" type="audio/mpeg" muted></audio>
         </canvas>
       </div>
     </div>
     <div class="sideLinks">
       <a href="https://www.linkedin.com/in/joe-d-espinosa-5617586/" target="_blank"><img src="assets/images/LinkedIn_Logo-White-66px-TM.png" alt="Visit my LinkedIn page"></a>
       <a href="https://github.com/joedspin/BoogieBuilder" target="_blank"><img src="assets/images/GitHub_Logo_White.png" alt="Visit the GitHub code repo for this app"></a>
+      <a href="http://www.joedespinosa.com" class="joe-link" target="_blank">Joe D&rsquo;Espinosa</a>
     </div>
+    
+  </div>
+  <div class="mixpad">
+    <button id="slice0" class="mixpad1" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice1" class="mixpad1" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice2" class="mixpad1" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice3" class="mixpad2" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice4" class="mixpad2" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice5" class="mixpad2" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice6" class="mixpad3" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice7" class="mixpad3" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice8" class="mixpad3" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice9" class="mixpad4" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice10" class="mixpad4" data-playing="false" role="switch" aria-checked="false"></button>
+    <button id="slice11" class="mixpad4" data-playing="false" role="switch" aria-checked="false"></button>
+  </div>
+  <div class="pad-labels">
+    <div>Guitar</div>
+    <div>Drums</div>
+    <div>Strings</div>
+    <div>Others</div>
   </div>
 </body>
 </html>

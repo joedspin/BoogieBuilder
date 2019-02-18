@@ -7,6 +7,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .stage {
@@ -15,20 +16,108 @@ body {
   justify-content: space-around;
 }
 
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+}
+
 .title {
-  margin-top: 50px;
-  font-size: 80px;
-  background: -webkit-linear-gradient(left, #ff3300, #1751a8);
+  font-size: 60px;
+  background: -webkit-linear-gradient(left, rgb(255,51,0),rgb(23,81,168));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
 
-.sideLinks {
+.sideLinks, .play-controls {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 120px;
+  margin: 10px;
 }
 
 .sideLinks img {
-  margin: 10px;
-  width: 80px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  width: 100px;
+}
+
+canvas {
+  margin: auto;
+  background-image: url('../images/boogie-background.png');
+}
+
+#info {
+  color: white;
+}
+
+.mixpad {
+  display: flex;
+  justify-content: space-around;
+}
+.mixpad1, .mixpad2, .mixpad3, .mixpad4, .play-button {
+  border: none;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+  color: rgb(190, 194, 206);
+  font-family: 'Fugaz One', Times, serif;
+}
+
+.mixpad1:active, .mixpad2:active, .mixpad3:active, .mixpad4:active, .play-button:active {
+  outline: none;
+}
+.mixpad1:hover, .mixpad2:hover, .mixpad3:hover, .mixpad4:hover, .play-button:hover {
+  outline: none;
+}
+
+.mixpad1:focus, .mixpad2:focus, .mixpad3:focus, .mixpad4:focus, .play-button:focus {
+  outline: none;
+}
+
+.play-button {
+  background-color: rgb(185, 62, 69);
+  width: 75px;
+  height: 75px;
+}
+
+.mixpad1 {
+  background-color: rgb(249, 54, 31);
+}
+
+.mixpad2 {
+  background-color: rgb(66, 79, 142);
+}
+
+.mixpad3 {
+  background-color: rgb(105, 73, 118);
+}
+
+.mixpad4 {
+  background-color: rgb(185, 62, 69);
+}
+
+.unmute {
+  box-shadow: 0 0 1px 1px rgb(190, 194, 206), 0 0 1px 1px rgb(190, 194, 206);
+}
+
+.pad-labels {
+  width: 415px;
+  font-size: 20px;
+  color: rgb(190, 194, 206);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.joe-link {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  margin-left: 17px;
 }
