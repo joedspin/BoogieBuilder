@@ -137,7 +137,12 @@ function drawTimer() {
     while (!othersFinished && infinityProtection > 0) {
       for (let i = 1; i < 12; i++) {
         othersFinished = true;
-        if (!slices[i].finished()) { othersFinished = false; }
+        if (!slices[i].finished()) { 
+          othersFinished = false; 
+          if (!slices[i].playing()) {
+            slices[i].audio.play();
+          }
+        }
       }
       infinityProtection --;
     }
