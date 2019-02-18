@@ -18,7 +18,8 @@ const COLORS = [
   "rgb(185, 62, 69)",
   "rgb(50, 9, 100)",
   "rgb(190, 194, 206)",
-  "gold"
+  "gold",
+  "hotpink"
 ];
 const COLOR_SELECTOR = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4];
 
@@ -48,6 +49,10 @@ class Slice {
 
   playing() {
     return !this.audio.muted;
+  }
+
+  finished() {
+    return this.audio.currentTime === this.audio.duration;
   }
 }
 
@@ -98,9 +103,6 @@ function drawCircle(x, y, ballRadius, color) {
   ctx.fillStyle = color;
   ctx.globalAlpha = 0.4;
   ctx.shadowColor = "white";
-  // ctx.shadowOffsetX = 1;
-  // ctx.shadowOffsetY = 1;
-  // ctx.shadowBlur = 1;
   ctx.fill();
   ctx.closePath();
 }
@@ -119,6 +121,14 @@ function drawTimer() {
   let size = ct / du * 500;
   drawBar(250 - (size / 2), 390, size);
   if (ct === du) {
+    // don't restart until all the audios have finished!
+    let othersFinished = false;
+    while (!othersFinished) {
+      for (let i = 1; i < 12; i++) {
+        othersFinished = true;
+        if (!slices[i].finished()) { othersFinished = false; }
+      }
+    }
     for (let i = 0; i < 12; i++) {
       slices[i].audio.play();
     }
@@ -138,12 +148,12 @@ function draw() {
         size = 50 * (a[j] / Math.max.apply(null, a));
         let randChoice = Math.floor(Math.random() * 6);
         if (randChoice === 3) { color = COLORS[Math.floor(Math.random()*8)]; }
-        driftingCircles.push(new driftingCircle((i * 40) + 30, 380, size, color));
+        driftingCircles.push(new driftingCircle((i * 40) + 80, 380, size, color));
         driftingCircles.forEach((circle) => {
           circle.draw();
           circle.drift();
         });
-        driftingCircles = driftingCircles.filter(circle => circle.y > 50);
+        driftingCircles = driftingCircles.filter(circle => circle.y > 80);
       }
     }
   }
@@ -169,7 +179,9 @@ function handlePlayButton(buttonEl) {
     }
     buttonEl.dataset.playing = 'false';
     buttonEl.innerHTML = 'Play';
-    driftingCircles = [];
+    // while (driftingCircles.length > 0) {
+    //   driftingCircles.pop();
+    // }
     clearInterval(interval);
   }
 }
