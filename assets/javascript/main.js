@@ -98,17 +98,17 @@ function drawCircle(x, y, ballRadius, color) {
   ctx.fillStyle = color;
   ctx.globalAlpha = 0.4;
   ctx.shadowColor = "white";
-  ctx.shadowOffsetX = 1;
-  ctx.shadowOffsetY = 1;
-  ctx.shadowBlur = 1;
+  // ctx.shadowOffsetX = 1;
+  // ctx.shadowOffsetY = 1;
+  // ctx.shadowBlur = 1;
   ctx.fill();
   ctx.closePath();
 }
 
 function drawBar(x, y, w) {
   ctx.beginPath();
-  ctx.rect(x, y, w, 5);
-  ctx.fillStyle = "rgb(249,54,31";
+  ctx.rect(x, y, w, 10);
+  ctx.fillStyle = "rgb(249, 54, 31)";
   ctx.globalAlpha = 1;
   ctx.fill();
 }
@@ -117,7 +117,7 @@ function drawTimer() {
   let ct = slices[1].audio.currentTime;
   let du = slices[1].audio.duration;
   let size = ct / du * 500;
-  drawBar(250 - (size / 2), 395, size);
+  drawBar(250 - (size / 2), 390, size);
   if (ct === du) {
     for (let i = 0; i < 12; i++) {
       slices[i].audio.play();
@@ -136,14 +136,14 @@ function draw() {
       let color = slices[i].color
       for (let j = 30; j < w; j += 250) {
         size = 50 * (a[j] / Math.max.apply(null, a));
-        let randChoice = Math.floor(Math.random() * 12);
-        if (randChoice === 6) { color = COLORS[Math.floor(Math.random()*8)]; }
-        driftingCircles.push(new driftingCircle((i * 40) + 30, 390, size, color));
+        let randChoice = Math.floor(Math.random() * 6);
+        if (randChoice === 3) { color = COLORS[Math.floor(Math.random()*8)]; }
+        driftingCircles.push(new driftingCircle((i * 40) + 30, 380, size, color));
         driftingCircles.forEach((circle) => {
           circle.draw();
           circle.drift();
         });
-        driftingCircles = driftingCircles.filter(circle => circle.y > 20);
+        driftingCircles = driftingCircles.filter(circle => circle.y > 50);
       }
     }
   }
