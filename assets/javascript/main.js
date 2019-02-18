@@ -67,14 +67,14 @@ class driftingCircle {
   }
 
   drift() {
-    this.y -= 15;
+    this.y -= 40;
     // let xMove = Math.floor(Math.random()*3);
     // if (Math.floor(Math.random()*2) === 1) {
     //   this.x += xMove;
     // } else {
     //   this.x -= xMove;
     // }
-    this.size = (this.size * 0.99);
+    this.size = (this.size * 1.24);
   }
 
   draw() {
@@ -103,11 +103,11 @@ function drawCircle(x, y, ballRadius, color) {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2, false);
   ctx.fillStyle = color;
-  ctx.globalAlpha = 1;
+  ctx.globalAlpha = 0.4;
   ctx.shadowColor = "white";
   ctx.shadowOffsetX = 1;
   ctx.shadowOffsetY = 1;
-  ctx.shadowBlur = 4;
+  ctx.shadowBlur = 1;
   ctx.fill();
   ctx.closePath();
 }
@@ -147,8 +147,10 @@ function draw() {
       let color = slices[i].color
       for (let j = 30; j < w; j += 250) {
         size = 50 * (a[j] / Math.max.apply(null, a));
-        if (Math.floor(Math.random()*24) === 12) { color = COLORS[Math.floor(Math.random()*8)]; }
-        driftingCircles.push(new driftingCircle((i * 40) + 30, 390, size, slices[i].color));
+        let randChoice = Math.floor(Math.random() * 12);
+        if (randChoice === 6) { color = COLORS[Math.floor(Math.random()*8)]; }
+        console.log(randChoice);
+        driftingCircles.push(new driftingCircle((i * 40) + 30, 390, size, color));
         driftingCircles.forEach((circle) => {
           circle.draw();
           circle.drift();
@@ -188,6 +190,7 @@ function handlePlayButton(buttonEl) {
     }
     buttonEl.dataset.playing = 'false';
     buttonEl.innerHTML = 'Play';
+    driftingCircles = [];
     clearInterval(interval);
   }
 }
