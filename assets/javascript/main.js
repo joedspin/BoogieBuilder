@@ -200,7 +200,6 @@ function handlePlayButton(buttonEl) {
     }
     buttonEl.dataset.playing = 'false';
     buttonEl.innerHTML = 'Play';
-    console.log(driftingCircles.length);
     let infinityProtection = 5000;
     while (driftingCircles.length > 0 && infinityProtection > 0) {
       driftingCircles.pop();
@@ -208,7 +207,6 @@ function handlePlayButton(buttonEl) {
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(interval);
-    console.log(driftingCircles.length);
   }
 }
 
