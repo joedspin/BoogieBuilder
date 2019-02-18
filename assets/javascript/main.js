@@ -11,7 +11,7 @@ let driftingCircles = [];
 const slices = new Array(12);
 
 const COLORS = [
-  "hotpink",
+  "white",
   "rgb(249, 54, 31)",
   "rgb(66, 79, 142)",
   "rgb(105, 73, 118)",
@@ -179,9 +179,10 @@ function handlePlayButton(buttonEl) {
     }
     buttonEl.dataset.playing = 'false';
     buttonEl.innerHTML = 'Play';
-    // while (driftingCircles.length > 0) {
-    //   driftingCircles.pop();
-    // }
+    while (driftingCircles.length > 0) {
+      driftingCircles.pop();
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(interval);
   }
 }
