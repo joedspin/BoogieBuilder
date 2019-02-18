@@ -8,6 +8,7 @@ let info = '';
 let globalShift = '';
 let dataArray = '';
 let driftingCircles = [];
+let messageMove = 300;
 const slices = new Array(12);
 
 const COLORS = [
@@ -84,7 +85,6 @@ class driftingCircle {
 function startAudio() {
   AudioContext = window.AudioContext || window.webkitAudioContext;
   audioContext = new AudioContext();
-
   for (let i = 0; i < 12; i++) {
     slices[i].track = audioContext.createMediaElementSource(slices[i].audio);
     slices[i].track.connect(audioContext.destination);
@@ -93,7 +93,6 @@ function startAudio() {
     slices[i].analyser.fftSize = 1024;
     slices[i].dataArray = new Uint8Array(slices[i].analyser.frequencyBinCount);
   }
-
   document.removeEventListener('click', startAudio);
 }
 
@@ -115,6 +114,17 @@ function drawBar(x, y, w) {
   ctx.fill();
 }
 
+function drawMessage() {
+  ctx.font = "24px 'Fugaz One'";
+  let gradient = ctx.createLinearGradient(0, 0, 600, 0);
+  gradient.addColorStop("0", "rgb(255, 51, 0)");
+  gradient.addColorStop("1.0", "rgb(23, 81, 168)");
+  ctx.fillStyle = gradient;
+  ctx.fillText("The magic starts when you click on an instrument below . . .", messageMove, canvas.height / 2); 
+  messageMove -= 1;
+  if (messageMove < -700) messageMove = 600;
+}
+
 function drawTimer() {
   let ct = slices[1].audio.currentTime;
   let du = slices[1].audio.duration;
@@ -123,7 +133,7 @@ function drawTimer() {
   if (ct === du) {
     // don't restart until all the audios have finished!
     let othersFinished = false;
-    let infinityProtection = 1000;
+    let infinityProtection = 50000;
     while (!othersFinished && infinityProtection > 0) {
       for (let i = 1; i < 12; i++) {
         othersFinished = true;
@@ -138,9 +148,12 @@ function drawTimer() {
 }
 
 function draw() {
+  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let nothingPlaying = true;
   for (let i = 0; i < 12; i++) {
     if (slices[i].playing()) {
+      nothingPlaying = false;
       slices[i].analyze();
       let a = slices[i].dataArray;
       let w = a.length;
@@ -159,6 +172,7 @@ function draw() {
     }
     driftingCircles = driftingCircles.filter(circle => circle.y > 80 && circle.size < 150);
   }
+  if (nothingPlaying) { drawMessage(); }
   drawTimer();
 }
 
