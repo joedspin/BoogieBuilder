@@ -123,11 +123,13 @@ function drawTimer() {
   if (ct === du) {
     // don't restart until all the audios have finished!
     let othersFinished = false;
-    while (!othersFinished) {
+    let infinityProtection = 1000;
+    while (!othersFinished && infinityProtection > 0) {
       for (let i = 1; i < 12; i++) {
         othersFinished = true;
         if (!slices[i].finished()) { othersFinished = false; }
       }
+      infinityProtection --;
     }
     for (let i = 0; i < 12; i++) {
       slices[i].audio.play();
@@ -153,9 +155,9 @@ function draw() {
           circle.draw();
           circle.drift();
         });
-        driftingCircles = driftingCircles.filter(circle => circle.y > 80);
       }
     }
+    driftingCircles = driftingCircles.filter(circle => circle.y > 80 && circle.size < 150);
   }
   drawTimer();
 }
@@ -179,11 +181,15 @@ function handlePlayButton(buttonEl) {
     }
     buttonEl.dataset.playing = 'false';
     buttonEl.innerHTML = 'Play';
-    while (driftingCircles.length > 0) {
+    console.log(driftingCircles.length);
+    let infinityProtection = 5000;
+    while (driftingCircles.length > 0 && infinityProtection > 0) {
       driftingCircles.pop();
+      infinityProtection --;
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(interval);
+    console.log(driftingCircles.length);
   }
 }
 

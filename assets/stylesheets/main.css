@@ -86,6 +86,7 @@ canvas {
   height: 75px;
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-left: 10px;
 }
 
 .mixpad1 {
@@ -129,4 +130,5 @@ canvas {
   color: rgb(190, 194, 206);
   text-align: center;
   line-height: 120%;
+  font-family: 'Quicksand', sans-serif;
 }
