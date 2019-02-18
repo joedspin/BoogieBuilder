@@ -118,8 +118,8 @@ function drawBar(x, y, w) {
 function drawTimer() {
   let ct = slices[1].audio.currentTime;
   let du = slices[1].audio.duration;
-  let size = ct / du * 500;
-  drawBar(250 - (size / 2), 390, size);
+  let size = ct / du * 600;
+  drawBar(300 - (size / 2), 390, size);
   if (ct === du) {
     // don't restart until all the audios have finished!
     let othersFinished = false;
