@@ -108,8 +108,12 @@ function drawCircle(x, y, ballRadius, color) {
 
 function drawBar(x, y, w) {
   ctx.beginPath();
-  ctx.rect(x, y, w, 10);
-  ctx.fillStyle = "rgb(249, 54, 31)";
+  ctx.rect(x, y, w, 20);
+  // ctx.fillStyle = "rgb(249, 54, 31)";
+  let gradient = ctx.createLinearGradient(0, 0, 600, 0);
+  gradient.addColorStop("0", "rgb(255, 51, 0)");
+  gradient.addColorStop("1.0", "rgb(23, 81, 168)");
+  ctx.fillStyle = gradient;
   ctx.globalAlpha = 1;
   ctx.fill();
 }
@@ -120,6 +124,7 @@ function drawMessage() {
   gradient.addColorStop("0", "rgb(255, 51, 0)");
   gradient.addColorStop("1.0", "rgb(23, 81, 168)");
   ctx.fillStyle = gradient;
+  ctx.globalAlpha = 1;
   ctx.fillText("The magic starts when you click on an instrument below . . .", messageMove, canvas.height / 2); 
   messageMove -= 1;
   if (messageMove < -700) messageMove = 600;
@@ -168,7 +173,7 @@ function draw() {
         size = 50 * (a[j] / Math.max.apply(null, a));
         let randChoice = Math.floor(Math.random() * 6);
         if (randChoice === 3) { color = COLORS[Math.floor(Math.random()*8)]; }
-        driftingCircles.push(new driftingCircle((i * 40) + 80, 380, size, color));
+        driftingCircles.push(new driftingCircle((i * 40) + 80, 370, size, color));
         driftingCircles.forEach((circle) => {
           circle.draw();
           circle.drift();
