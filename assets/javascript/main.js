@@ -204,7 +204,6 @@ function draw() {
   if (nothingPlaying) { drawMessage(); }
 }
 
-
 function addButtons(theme) {
   // theme should be 'default' or 'red' is the only other theme for now
   let mixpad = document.getElementById("mixpad");
@@ -305,8 +304,6 @@ function handleModeButton() {
     clearInterval(interval);
     for (let i = 0; i < 12; i++) {
       slices[i].button.removeEventListener('click', function () { slices[i].toggle() }, false);
-      // slices[i].audio.stop();
-      // slices[i].audio.source = null;
       slices[i] = '';
     }
     removeButtons();
