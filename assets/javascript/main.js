@@ -9,6 +9,8 @@ let globalShift = '';
 let dataArray = '';
 let driftingCircles = [];
 let messageMove = 300;
+let playButton1 = '';
+let modeButton1 = '';
 const slices = new Array(12);
 
 const COLORS = [
@@ -20,9 +22,17 @@ const COLORS = [
   "rgb(50, 9, 100)",
   "rgb(190, 194, 206)",
   "gold",
-  "hotpink"
+  "hotpink",
+  "rgb(50,8,100)"
 ];
 const COLOR_SELECTOR = [1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4];
+const INSTR_SELECTOR = ['guitar','guitar','guitar',
+                        'drum','drum','drum',
+                        'string','string','string',
+                        'bass','bass','bass','bass'];
+const THEMES = ['default','red'];
+const THEME_NAMES = ['Purple Mode','Red Mode'];
+let currentTheme = THEMES[0];
 
 class Slice {
   constructor() {
@@ -83,8 +93,6 @@ class driftingCircle {
 }
 
 function startAudio() {
-  AudioContext = window.AudioContext || window.webkitAudioContext;
-  audioContext = new AudioContext();
   for (let i = 0; i < 12; i++) {
     slices[i].track = audioContext.createMediaElementSource(slices[i].audio);
     slices[i].track.connect(audioContext.destination);
@@ -94,6 +102,16 @@ function startAudio() {
     slices[i].dataArray = new Uint8Array(slices[i].analyser.frequencyBinCount);
   }
   document.removeEventListener('click', startAudio);
+}
+
+function attachSlices() {
+  for (let i = 0; i < 12; i++) {
+    slices[i] = new Slice();
+    slices[i].audio = document.getElementById(`audio${i}`);
+    slices[i].button = document.getElementById(`slice${i}`);
+    slices[i].color = COLORS[COLOR_SELECTOR[i]];
+    slices[i].button.addEventListener('click', function () { slices[i].toggle() }, false)
+  }
 }
 
 function drawCircle(x, y, ballRadius, color) {
@@ -159,7 +177,6 @@ function drawTimer() {
 }
 
 function draw() {
-  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   let nothingPlaying = true;
   for (let i = 0; i < 12; i++) {
@@ -183,8 +200,65 @@ function draw() {
     }
     driftingCircles = driftingCircles.filter(circle => circle.y > 80 && circle.size < 150);
   }
-  if (nothingPlaying) { drawMessage(); }
   drawTimer();
+  if (nothingPlaying) { drawMessage(); }
+}
+
+
+function addButtons(theme) {
+  // theme should be 'default' or 'red' is the only other theme for now
+  let mixpad = document.getElementById("mixpad");
+  let button = '';
+  for (let i = 0; i < 12; i++) {
+    button = document.createElement("BUTTON");
+    button.id = `slice${i}`;
+    let num = COLOR_SELECTOR[i];
+    if (theme !== "default" && i < 3) num += 4;
+    button.className = `mixpad${num}`;
+    button.dataPlaying = "false";
+    mixpad.appendChild(button);
+  }
+  if (theme === "default") {
+    document.getElementById("button1").style.backgroundColor = `${COLORS[4]}`;
+    document.getElementById("button2").style.backgroundColor = `${COLORS[4]}`;
+  } else {
+    document.getElementById("button1").style.backgroundColor = `${COLORS[3]}`;
+    document.getElementById("button2").style.backgroundColor = `${COLORS[3]}`;
+  }
+  let bodyElement = document.querySelector("body");
+  bodyElement.style.backgroundColor = `${COLORS[9]}`;
+  canvas.style.backgroundImage = `url('./assets/images/boogie-background${theme !== 'default' ? `-${theme}` : ''}.png')`;
+  title.className = `title-${theme}`;
+}
+
+function removeButtons() {
+  var button = '';
+  for (let i = 0; i < 12; i++) {
+    button = document.querySelector(`button#slice${i}`);
+    button.parentNode.removeChild(button);
+  }
+}
+
+function addAudios(theme) {
+  // theme should be empty string for default. 'red' is the only other theme for now
+  let audio = '';
+  for (let i = 0; i < 12; i++) {
+    audio = document.createElement("AUDIO");
+    audio.id = `audio${i}`;
+    audio.muted = true;
+    audio.src = `assets/audios/${INSTR_SELECTOR[i]}${(i % 3) + 1}${theme !== 'default' ? `-${theme}` : ''}.mp3`;
+    audio.setAttribute('type', 'audio/mpeg');
+    audio.muted = true;
+    canvas.appendChild(audio);
+  }
+}
+
+function removeAudios() {
+  var audio = '';
+  for (let i = 0; i < 12; i++) {
+    audio = document.querySelector(`audio#audio${i}`);
+    audio.parentNode.removeChild(audio);
+  }
 }
 
 function handlePlayButton(buttonEl) {
@@ -216,6 +290,43 @@ function handlePlayButton(buttonEl) {
   }
 }
 
+function handleModeButton() {
+    for (let i = 0; i < 12; i++) {
+      slices[i].audio.pause();
+    }
+    button1.dataset.playing = 'false';
+    button1.innerHTML = 'Play';
+    let infinityProtection = 5000;
+    while (driftingCircles.length > 0 && infinityProtection > 0) {
+      driftingCircles.pop();
+      infinityProtection--;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    clearInterval(interval);
+    for (let i = 0; i < 12; i++) {
+      slices[i].button.removeEventListener('click', function () { slices[i].toggle() }, false);
+      // slices[i].audio.stop();
+      // slices[i].audio.source = null;
+      slices[i] = '';
+    }
+    removeButtons();
+    removeAudios();
+    let other = THEMES[1];
+    THEMES[1] = THEMES[0];
+    THEMES[0] = other;
+    other = THEME_NAMES[1];
+    THEME_NAMES[1] = THEME_NAMES[0];
+    THEME_NAMES[0] = other;
+    other = COLORS[9];
+    COLORS[9] = COLORS[1];
+    COLORS[1] = other;
+    addAudios(THEMES[0]);
+    addButtons(THEMES[0]);
+    attachSlices();
+    modeButton1.innerHTML = THEME_NAMES[1];
+    startAudio();
+}
+
 function keyboardAction(e) {
   if (e.keyCode === 62) {
     handlePlayButton(playButton1);
@@ -223,24 +334,22 @@ function keyboardAction(e) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
+  AudioContext = window.AudioContext || window.webkitAudioContext;
+  audioContext = new AudioContext();
+
+  addAudios(THEMES[0]);
+  addButtons(THEMES[0]);
+  attachSlices();
 
   title = document.getElementById('title');
-  for (let i = 0; i < 12; i++) {
-    slices[i] = new Slice();
-    slices[i].audio = document.getElementById(`audio${i}`);
-    slices[i].button = document.getElementById(`slice${i}`);
-    slices[i].color = COLORS[COLOR_SELECTOR[i]];
-    slices[i].button.addEventListener('click', function() {slices[i].toggle()}, false)
-  }
   info = document.getElementById('info');
-  const playButton1 = document.getElementById('button1');
+  playButton1 = document.getElementById('button1');
+  modeButton1 = document.getElementById('button2');
 
   document.addEventListener('click', startAudio);
   document.addEventListener('keydown', keyboardAction);
   playButton1.addEventListener('click', function() {handlePlayButton(playButton1);}, false);
-
-
+  modeButton1.addEventListener('click', function () { handleModeButton(); }, false);
 });

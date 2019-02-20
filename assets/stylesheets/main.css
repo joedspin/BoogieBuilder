@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Fugaz+One');
 
 body {
-  background-color: #330066;
   font-family: 'Fugaz One', Times, serif;
   display: flex;
   align-items: center;
@@ -14,6 +13,10 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 .stage {
@@ -29,9 +32,16 @@ body {
   margin-top: 0;
 }
 
-.title {
+.title-default {
   font-size: 60px;
   background: -webkit-linear-gradient(left, rgb(255,51,0),rgb(23,81,168));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.title-red {
+  font-size: 60px;
+  background: -webkit-linear-gradient(left, rgb(50,8,100),rgb(23,81,168));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
@@ -63,7 +73,7 @@ canvas {
   display: flex;
   justify-content: space-around;
 }
-.mixpad1, .mixpad2, .mixpad3, .mixpad4, .play-button {
+.mixpad1, .mixpad2, .mixpad3, .mixpad4, .mixpad5, .play-button {
   border: none;
   width: 30px;
   height: 30px;
@@ -75,14 +85,14 @@ canvas {
   font-family: 'Fugaz One', Times, serif;
 }
 
-.mixpad1:active, .mixpad2:active, .mixpad3:active, .mixpad4:active, .play-button:active {
+.mixpad1:active, .mixpad2:active, .mixpad3:active, .mixpad4:active, .mixpad5:active, .play-button:active {
   outline: none;
 }
-.mixpad1:hover, .mixpad2:hover, .mixpad3:hover, .mixpad4:hover, .play-button:hover {
+.mixpad1:hover, .mixpad2:hover, .mixpad3:hover, .mixpad4:hover, .mixpad5:hover, .play-button:hover {
   outline: none;
 }
 
-.mixpad1:focus, .mixpad2:focus, .mixpad3:focus, .mixpad4:focus, .play-button:focus {
+.mixpad1:focus, .mixpad2:focus, .mixpad3:focus, .mixpad4:focus, .mixpad5:focus, .play-button:focus {
   outline: none;
 }
 
@@ -93,6 +103,7 @@ canvas {
   margin-top: 15px;
   margin-bottom: 15px;
   margin-left: 10px;
+  line-height: 110%;
 }
 
 .mixpad1 {
@@ -109,6 +120,10 @@ canvas {
 
 .mixpad4 {
   background-color: rgb(185, 62, 69);
+}
+
+.mixpad5 {
+  background-color: rgb(50, 8, 100);
 }
 
 .unmute {
