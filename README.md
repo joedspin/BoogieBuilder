@@ -1,5 +1,5 @@
 # Boogie Builder
-Boogie Builder puts you in charge of the dance floor!
+Boogie Builder puts you in charge of the dance floor! [Live demo](https://joedspin.github.io/BoogieBuilder)
 
 You're the DJ, remixer, and lighting person! Click play to start then you can gradually build up a funky disco groove by adding and removing any of 12 different instrument parts. Start small and slowly add in more parts. Each one you add also enhances the light show.
 
