@@ -31,7 +31,7 @@ const INSTR_SELECTOR = ['guitar','guitar','guitar',
                         'string','string','string',
                         'bass','bass','bass','bass'];
 const THEMES = ['default','red'];
-const THEME_NAMES = ['Purple Mode','Red Mode'];
+const THEME_NAMES = ['Freak Mode','Beep Mode'];
 let currentTheme = THEMES[0];
 
 class Slice {
@@ -260,25 +260,25 @@ function removeAudios() {
   }
 }
 
-function handlePlayButton(buttonEl) {
+function handlePlayButton() {
   // if audio context state is suspended, resume it
   if (audioContext.state === 'suspended') {
     audioContext.resume();
   }
   // play or pause track depending on state and flip state
-  if (buttonEl.dataset.playing === 'false') {
+  if (playButton1.dataset.playing === 'false') {
     for (let i = 0; i < 12; i++) {
       slices[i].audio.play();
     }
-    buttonEl.dataset.playing = 'true';
-    buttonEl.innerHTML = 'Pause';
+    playButton1.dataset.playing = 'true';
+    playButton1.innerHTML = 'Pause';
     interval = setInterval(draw, 10);
-  } else if (buttonEl.dataset.playing === 'true') {
+  } else if (playButton1.dataset.playing === 'true') {
     for (let i = 0; i < 12; i++) {
       slices[i].audio.pause();
     }
-    buttonEl.dataset.playing = 'false';
-    buttonEl.innerHTML = 'Play';
+    playButton1.dataset.playing = 'false';
+    playButton1.innerHTML = 'Play';
     let infinityProtection = 5000;
     while (driftingCircles.length > 0 && infinityProtection > 0) {
       driftingCircles.pop();
@@ -293,8 +293,6 @@ function handleModeButton() {
     for (let i = 0; i < 12; i++) {
       slices[i].audio.pause();
     }
-    button1.dataset.playing = 'false';
-    button1.innerHTML = 'Play';
     let infinityProtection = 5000;
     while (driftingCircles.length > 0 && infinityProtection > 0) {
       driftingCircles.pop();
@@ -322,6 +320,12 @@ function handleModeButton() {
     attachSlices();
     modeButton1.innerHTML = THEME_NAMES[1];
     startAudio();
+  if (playButton1.dataset.playing = 'true') {
+    for (let i = 0; i < 12; i++) {
+      slices[i].audio.play();
+    }
+    interval = setInterval(draw, 10);
+  }
 }
 
 function keyboardAction(e) {
@@ -347,6 +351,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener('click', startAudio);
   document.addEventListener('keydown', keyboardAction);
-  playButton1.addEventListener('click', function() {handlePlayButton(playButton1);}, false);
+  playButton1.addEventListener('click', function() {handlePlayButton();}, false);
   modeButton1.addEventListener('click', function () { handleModeButton(); }, false);
 });

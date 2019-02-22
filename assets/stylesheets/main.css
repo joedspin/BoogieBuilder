@@ -153,3 +153,18 @@ canvas {
   line-height: 120%;
   font-family: 'Quicksand', sans-serif;
 }
+
+.readme-link {
+  color: white;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+a:visited, a:hover, a:active {
+  color: white;
+  text-decoration: none;
+}
+
+.footer {
+  margin-top: 20px;
+}
